@@ -1,3 +1,4 @@
+"usestrict"
 const parkTypesArray = [
     "National Park",
     "National Monument",
@@ -6936,20 +6937,20 @@ const waysToSearch =[
 
 // this is the onload function 
 window.onload = function(){
-    waysToSearchAppend()
-    selectSearchByLocationDropDown()
-    selectSearchByParkType()
-    let location = document.getElementById("location")
-    let locationStyle = location.style.display="none"
-    let parkType = document.getElementById("parkType")
-    let parkTypeStyle =parkType.style.display = "none"
-   const WaysOption= document.getElementById("WaysToSearch")
-     WaysOption.onchange = onWaysOptionsChange
-    let SearchBtn = document.getElementById("searchBtn")
-    SearchBtn.onclick= SearchBtnOnClicked
+    waysToSearchAppend();
+    selectSearchByLocationDropDown();
+    selectSearchByParkType();
+    let location = document.getElementById("location");
+    let locationStyle = location.style.display="none";
+    let parkType = document.getElementById("parkType");
+    let parkTypeStyle =parkType.style.display = "none";
+    const WaysOption= document.getElementById("WaysToSearch");
+    WaysOption.onchange = onWaysOptionsChange;
+    let searchBtn = document.getElementById("searchbtn");
+    searchBtn.onclick = searchBtnOnClick;
     
    
-}
+};
 
 // this fucnction programatically add to the select 
 function waysToSearchAppend(){
@@ -6989,7 +6990,7 @@ function onWaysOptionsChange(){
 
         let location = document.getElementById("location");
         location.style.display="none"
-    }
+    };
     
    
 
@@ -7021,63 +7022,74 @@ function selectSearchByParkType(){
 
 };
 
-// function getParksByLocation(parks, location){
-//     let return = [];
-//     let nationalParksArrayLenght = nationalParksArray.length;
-//     for (let k = 0 ; k< nationalParksArrayLenght;k++ ){
-//         if (nationalParksArray[k].State == State){
+function getParksByLocation(parks, location){
+    let results = [];
+    let nationalParksArrayLength  = nationalParksArray.length;
+    for (let k = 0 ; k< nationalParksArrayLength; k++ ){
+        if (nationalParksArray[k].State == State){
+            results.push(nationalParksArray[k]);
 
-//             returnnationalParksArray
-//         }
-
-
-//     }
-
-// };
-
-// function getParksByType(parks, type){
-//     let return = []
-//     let nationalParksArrayLenght= nationalParksArray.length;
-//     for (let k = 0 ; k < nationalParksArrayLenght ; k++)
-//         if (nationalParksArray[k].locationname ==){
-
-//         }
-
-
-// };
-
-function displayParks(parks){
+        }
+    }
+    return results;
 
 };
 
-function SearchBtnOnClicked(){
+function getParksByType(parks, type){
+    let results = []
+    let nationalParksArrayLength = nationalParksArray.length;
+    for (let k = 0 ; k < nationalParksArrayLength ; k++){
+        if (nationalParksArray[k].LocationName.includes(type)  ){
+            results.push(nationalParksArray[k])
+           
+        }
+
+    }
+    return results;
+
+
+};
+
+function displayParks(parks){
+    let row = tbody.insertNow();
+    let tdParkName=  row.insertCell();
+    tdParkName.innerHTML= nationalParksArray.name;
+
+    let tdAddress = row.insertCell(1);
+    tdAddress = nationalParksArray.Address;
+
+    let tdCity = row.insertCell(2);
+    tdCity.innerHTML = nationalParksArray.City;
+
+    let tdState = row.insertCell(3);
+    tdState.innerHTML = nationalParksArray.State;
+   
+    let tdZipCode = row.insertCell(4);
+    tdZipCode.innerHTML = nationalParksArray.ZipCode;
+};
+
+function searchBtnOnClick(){
     let location = document.getElementById("location");
     let locationValue = location.value;
     let parkType = document.getElementById("parkType");
     let parkTypeValue = parkType.value;
     
-    let nationalParksArrayLenght = nationalParksArray.length;
-    for (let k = 0; k < nationalParksArrayLenght; k++){
-        if (nationalParksArray[k].State==State){
-            
-
-        };
-
-
-    };
+    let nationalParksArrayLength = nationalParksArray.length;
+   
 
     let filteredParks;
     //decide if this is a location search or type search..
 
 
     //if location search
-    filteredParks = getParksByLocation(nationalParksArray, selectedLocation);
+    filteredParks = getParksByLocation(nationalParksArray, locationValue);
 
     ///if type...
-    filteredParks = getParksByType();
+    filteredParks = getParksByType(nationalParksArray, parkTypeValue);
 
 
     /// finally now we have results, display them:
+    // displayParks(filteredParks);
     displayParks(filteredParks);
     
 };
