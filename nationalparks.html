@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/nationalparks.css">
   
 </head>
 <body>
@@ -24,7 +25,7 @@
                 <a class="nav-link" href="Mountainsinformation.html">Mountains</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="nationalparks.html">Mountains</a>
+                <a class="nav-link" href="nationalparks.html">National Parks</a>
               </li>
          
                
@@ -34,44 +35,59 @@
             </form>
           </div>
         </div>
-      </nav>
-      <div>
-        <img src="images/photo-1585409677983-0f6c41ca9c3b.jpg" class="card-img-top" alt="">
-      </div>
+    </nav>
+    <div class="Holder">
+
+        <div class="firstImg">
+          <img src="images/new-york-new-york-city-best-parks-central-park-bow-bridge.jpg" class="card-img-top" alt="">
+        </div>
 
 
-      <div class="FindLocation">
+      <div class="containerDiv">
+
+        <div class="FindLocation">
+          
+          <h1>Find a Park</h1>
+          <select id="WaysToSearch"></select>
+          
+        </div>
+        <div class="AlternateParks">
+          <select  id="location" ></select>
+
         
-        <h1>Find a Park</h1>
-        <select id="WaysToSearch"></select>
+          <select  id="parkType">
+          
 
-      </div>
-      <div class="">
-        <select  id="location" ></select>
+            </select>
+          
+        </div>
+        <div>
 
-      
-        <select  id="parkType"></select>
-        
-      </div>
-      <button  id="searchbtn">search</button>
+          <button class="btn btn-primary searchBtn" id="searchbtn">search</button>
+    
+    
+          <a href="#" id="viewAll">view All</a>
+        </div>
+      </div>  
+    </div>
+ 
+    <div class="table-responsive">
 
-
-      <p id="outputText">
-      </p>
-
-      <table id="tableOutput ">
-        <thead>
-          <tr>
-             <th>Park</th>
-          <th>Address</th>
-          <th>City</th>
-          <th>State</th>
-          </tr>
-         
-        </thead>
-        <tbody id="tbodyOutput">
-        </tbody>
-      </table>
+        <table id="tableOutput " class="table-success align-midle table">
+          <thead class="thContent">
+            <tr>
+            <th scope="col">Park</th>
+            <th scope="col">Address</th>
+            <th scope="col">City</th>
+            <th scope="col">State</th>
+            <th scope="col">zip code</th>
+            </tr>
+          
+          </thead>
+          <tbody id="tbodyOutput">
+          </tbody>
+        </table>
+    </div>
 
 
 

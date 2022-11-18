@@ -1,0 +1,32 @@
+
+.holder{
+    position: relative;
+    margin: 0 auto;
+
+}
+.containerDiv{
+    justify-content: center;
+    text-align: center;
+    background-color: white;
+    width: 50%;
+    position: relative;
+    bottom: 6rem;
+    left: 30%;
+}
+.FindLocation h1 {
+    font-size: 5rem;
+    /* color:light; */
+    margin-bottom: 1rem;
+}
+.FindLocation{
+    margin-bottom: 1rem;
+}
+
+
+/*this is the syle for the btn  */
+.searchBtn{
+    margin-right: 2rem;
+    margin-top: 1rem;
+}
+
+
