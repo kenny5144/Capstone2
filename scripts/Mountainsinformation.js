@@ -544,26 +544,59 @@ function addOptionToListSelect() {
         mountainLists.appendChild(theOption);
     }
 }
+let outputText = document.getElementById("outputMessage");
 
-function onchangeMountainLists() {
-    let mountainLists = document.getElementById("mountainLists");
-    let mountainListsValue = mountainLists.value;
-    let outputText = document.getElementById("outputMessage");
-    let loopTrueArrayAnswer = loopTrueArray(mountainsArray, mountainListsValue);
-    console.log(loopTrueArrayAnswer);
-    outputText.innerHTML = loopTrueArrayAnswer;
+async function getSunsetForMountain(lat, lng) {
+    let response = await fetch(
+        `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&date=today`);
+    let data = await response.json();
+    return data;
 }
 
 function loopTrueArray(mountainsArray, name) {
     let result = [];
+    let sunriseData;
     let mountainsArrayLenght = mountainsArray.length;
     for (let k = 0; k < mountainsArrayLenght; k++) {
-       if (mountainsArray[k].name == name){
-        result=mountainsArray[k].desc + mountainsArray[k].elevation +"</br>" +"<img src='images/" +mountainsArray[k].img + "' width='' height= '100rem'></img>" 
-        console.log(result)
+        if (mountainsArray[k].name == name) {
+           
+            let getSUnsetvalve = getSunsetForMountain(mountainsArray[k].coords.lat, mountainsArray[k].coords.lng).then(data => {
+              
+              sunriseData = data.results.sunrise;
+              console.log(sunriseData)
+                
+                
+            });
+           
+            result = mountainsArray[k].desc + " " + mountainsArray[k].elevation + "</br>" + "" + "<img src='images/" + mountainsArray[k].img + "' width='' height= '100rem'></img>" ;
+        }
 
-       }
-    
     }
     return result;
 }
+// let mountainsArrayLenght = mountainsArray.length;
+// for (let k = 0; k < mountainsArrayLenght; k++) {
+//         let getSUnsetvalve = getSunsetForMountain(mountainsArray[k].coords.lat, mountainsArray[k].coords.lng).then(data => {
+          
+//           sunriseData = data.results.sunrise;
+//           console.log(sunriseData)
+            
+//           let testing = document.getElementById("testing")
+//           testing.innerHTML=sunriseData
+//           console.log(testing)
+//         });
+
+//     }
+function onchangeMountainLists() {
+    let mountainLists = document.getElementById("mountainLists");
+    let mountainListsValue = mountainLists.value;
+
+    let loopTrueArrayAnswer = loopTrueArray(mountainsArray, mountainListsValue);
+
+    outputText.innerHTML = loopTrueArrayAnswer;
+
+
+}
+
+
+
